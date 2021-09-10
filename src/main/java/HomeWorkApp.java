@@ -51,7 +51,7 @@ public class HomeWorkApp {
         } else {
             System.out.println("a < b");
         }
-//        Вариант второй:
+//        Вариант второй:)
 //       String result = (a >= b) ? "a >= b" : "a < b";
 //        System.out.println(result);
     }
