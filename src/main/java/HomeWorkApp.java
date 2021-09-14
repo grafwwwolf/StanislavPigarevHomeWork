@@ -2,57 +2,56 @@ public class HomeWorkApp {
 
     public static void main(String[] args) {
 
-        printThreeWords();
-        checkSumSign();
-        printColor();
-        compareNumbers();
+        System.out.println(checkSum(5, -4));
+        checkNumber(0);
+        System.out.println(checkNumberBollean(1));
+        printText("Some text", 1);
+        System.out.println(checkLeapYear(2020));
     }
 
-    public static void printThreeWords() {
-        System.out.println("Orange");
-        System.out.println("Banana");
-        System.out.println("Apple");
+    public static boolean checkSum(int a, int b) {
+
+        return ((10 <= a + b) && (a + b <= 20));
+
     }
 
-    public static void checkSumSign() {
-        int a = 101;
-        int b = -1101;
-        if ((a + b) >= 0) {
-            System.out.println("Сумма положительная");
+    public static void checkNumber(int a) {
+//        вариант 1
+        if (a < 0) {
+            System.out.println("Число отрицательное");
         } else {
-            System.out.println("Сумма отрицательная");
+            System.out.println("Число положительное");
         }
-//        Вариант второй:
-//       String result = (a + b) >= 0 ? "Сумма положительная" : "Сумма отрицательная";
-//        System.out.println(result);
+//        вариант 2
+//        System.out.println(a < 0 ? "Число отрицательное" : "Число положительное");
     }
 
-    public static void printColor() {
+    public static boolean checkNumberBollean(int a) {
+        return a < 0;
 
-        int value = 101;
-
-        if (value <= 0) {
-            System.out.println("Красный");
-        }
-        else if ((value > 0) && (value <= 100)) {
-            System.out.println("Желтый");
-        }
-        else {
-            System.out.println("Зеленый");
-        }
     }
 
-    public static void compareNumbers() {
-        int a = 101;
-        int b = 101;
-
-        if (a >= b) {
-            System.out.println("a >= b");
-        } else {
-            System.out.println("a < b");
+    public static void printText(String text, int n) {
+        if (n >= 1) {
+            for (int i = 0; i < n; i++) {
+                System.out.println(text);
+            }
         }
-//        Вариант второй:)
-//       String result = (a >= b) ? "a >= b" : "a < b";
-//        System.out.println(result);
+//        можно добавить при необходимости:
+//        else {
+//            System.out.println("Переданное число повторений не может быть меньше 1. Укажите верное значение.");
+//        }
+
+    }
+
+    public static boolean checkLeapYear(int a) {
+        if ((a % 400) == 0) {
+            return true;
+        } else if ((a % 100) == 0) { // здесь else необязательно
+            return false;
+        } else if ((a % 4) == 0) {  // здесь else необязательно
+            return true;
+        }
+        return false;
     }
 }
