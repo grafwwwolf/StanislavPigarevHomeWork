@@ -47,7 +47,7 @@ public class HomeWorkApp {
     public static boolean checkLeapYear(int a) {
         if ((a % 400) == 0) {
             return true;
-        } else if ((a % 100) == 0) { // здесь else необязательно
+        } else if ((a % 100) == 0) { // здесь else необязательно :)
             return false;
         } else if ((a % 4) == 0) {  // здесь else необязательно
             return true;
