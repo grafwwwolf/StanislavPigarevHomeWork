@@ -9,8 +9,8 @@ public class HomeWorkApp {
     private static final char X_DOT = 'X';
     private static final char O_DOT = 'O';
     private static final char EMPTY_DOT = '•';
-    private static final int mapSize = 5;
-    private static final int POINTS_TO_WIN = 4;
+    private static final int mapSize = 3;
+    private static final int POINTS_TO_WIN = 3;
     private static final Scanner SC = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -59,16 +59,14 @@ public class HomeWorkApp {
             }
         }
         return false;
-
     }
-
-    private static boolean checkRight(int i, int j, char dot) {
-        if (j > map.length - POINTS_TO_WIN) {
+    private static boolean checkRight(int i, int k, char dot) {
+        if (k > 0) {
             return false;
         }
-        for (int k = 0; k < POINTS_TO_WIN; k++) {
+        for (int j = 0; j < 3; j++) {
             if (map[i][j] == dot) {
-                j++;
+                continue;
             } else {
                 return false;
             }
@@ -77,12 +75,12 @@ public class HomeWorkApp {
     }
 
     private static boolean checkDown(int i, int j, char dot) {
-        if (i > map.length - POINTS_TO_WIN) {
+        if (i > 0) {
             return false;
         }
-        for (int k = 0; k < POINTS_TO_WIN; k++) {
-            if (map[i][j] == dot) {
-                i++;
+        for (int k = 0; k < 3; k++) {
+            if (map[k][j] == dot) {
+                continue;
             } else {
                 return false;
             }
@@ -91,10 +89,10 @@ public class HomeWorkApp {
     }
 
     private static boolean checkRightDown(int i, int j, char dot) {
-        if ((i > map.length - POINTS_TO_WIN) || (j > map.length - POINTS_TO_WIN)) {
+        if ((i > 0) || (j > 0)) {
             return false;
         }
-        for (int k = 0; k < POINTS_TO_WIN; k++) {
+        for (int k = 0; k < 3; k++) {
             if (map[i][j] == dot) {
                 i++;
                 j++;
@@ -106,10 +104,10 @@ public class HomeWorkApp {
     }
 
     private static boolean checkRightUp(int i, int j, char dot) {
-        if ((i < POINTS_TO_WIN - 1) || (j > map.length - POINTS_TO_WIN)) {
+        if ((i < 2) || (j > 0)) {
             return false;
         }
-        for (int k = 0; k < POINTS_TO_WIN; k++) {
+        for (int k = 0; k < 3; k++) {
             if (map[i][j] == dot) {
                 i--;
                 j++;
@@ -119,6 +117,64 @@ public class HomeWorkApp {
         }
         return true;
     }
+
+//    private static boolean checkRight(int i, int j, char dot) {
+//        if (j > map.length - POINTS_TO_WIN) {
+//            return false;
+//        }
+//        for (int k = 0; k < POINTS_TO_WIN; k++) {
+//            if (map[i][j] == dot) {
+//                j++;
+//            } else {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    private static boolean checkDown(int i, int j, char dot) {
+//        if (i > map.length - POINTS_TO_WIN) {
+//            return false;
+//        }
+//        for (int k = 0; k < POINTS_TO_WIN; k++) {
+//            if (map[i][j] == dot) {
+//                i++;
+//            } else {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    private static boolean checkRightDown(int i, int j, char dot) {
+//        if ((i > map.length - POINTS_TO_WIN) || (j > map.length - POINTS_TO_WIN)) {
+//            return false;
+//        }
+//        for (int k = 0; k < POINTS_TO_WIN; k++) {
+//            if (map[i][j] == dot) {
+//                i++;
+//                j++;
+//            } else {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    private static boolean checkRightUp(int i, int j, char dot) {
+//        if ((i < POINTS_TO_WIN - 1) || (j > map.length - POINTS_TO_WIN)) {
+//            return false;
+//        }
+//        for (int k = 0; k < POINTS_TO_WIN; k++) {
+//            if (map[i][j] == dot) {
+//                i--;
+//                j++;
+//            } else {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
 
     private static void humanTurn() {
