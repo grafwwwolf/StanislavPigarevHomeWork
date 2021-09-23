@@ -1,7 +1,7 @@
 
-        import java.util.Arrays;
-        import java.util.Random;
-        import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 public class HomeWorkApp {
 
@@ -9,7 +9,8 @@ public class HomeWorkApp {
     private static final char X_DOT = 'X';
     private static final char O_DOT = 'O';
     private static final char EMPTY_DOT = '•';
-    private static final int mapSize = 3;
+    private static final int mapSize = 5;
+    private static final int POINTS_TO_WIN = 4;
     private static final Scanner SC = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -41,34 +42,102 @@ public class HomeWorkApp {
     }
 
     private static boolean isWin(char dot) {
-        if (map[0][0] == dot && map[0][1] == dot && map[0][2] == dot){
-            return true;
+        for (int i = 0; i < mapSize; i++) {
+            for (int j = 0; j < mapSize; j++) {
+                if (checkRight(i, j, dot)) {
+                    return true;
+                }
+                if (checkDown(i, j, dot)) {
+                    return true;
+                }
+                if (checkRightDown(i, j, dot)) {
+                    return true;
+                }
+                if (checkRightUp(i, j, dot)) {
+                    return true;
+                }
+            }
         }
-        if (map[1][0] == dot && map[1][1] == dot && map[1][2] == dot){
-            return true;
-        }
-        if (map[2][0] == dot && map[2][1] == dot && map[2][2] == dot){
-            return true;
-        }
-
-        if (map[0][0] == dot && map[1][0] == dot && map[2][0] == dot){
-            return true;
-        }
-        if (map[0][1] == dot && map[1][1] == dot && map[2][1] == dot){
-            return true;
-        }
-        if (map[0][2] == dot && map[1][2] == dot && map[2][2] == dot){
-            return true;
-        }
-
-        if (map[0][0] == dot && map[1][1] == dot && map[2][2] == dot){
-            return true;
-        }
-        if (map[2][0] == dot && map[1][1] == dot && map[0][2] == dot){
-            return true;
-        }
-
         return false;
+
+    }
+
+    private static boolean checkRight(int i, int k, char dot) {
+        int winPoints = 0;
+        for (int j = k; j < mapSize; j++) {
+            if ((map.length - j < POINTS_TO_WIN) && (winPoints == 0)) {
+                break;
+            }
+            if (map[i][j] == dot) {
+                winPoints++;
+            } else {
+                winPoints = 0;
+            }
+            if (winPoints == POINTS_TO_WIN) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private static boolean checkDown(int k, int j, char dot) {
+        int winPoints = 0;
+        for (int i = k; i < mapSize; i++) {
+            if ((map.length - i < POINTS_TO_WIN) && (winPoints == 0)) {
+                break;
+            }
+            if (map[i][j] == dot) {
+                winPoints++;
+            } else {
+                winPoints = 0;
+            }
+            if (winPoints == POINTS_TO_WIN) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private static boolean checkRightDown(int k, int j, char dot) {
+        int winPoints = 0;
+        for (int i = k; i < mapSize; i++, j++) {
+            if ((map.length - i < POINTS_TO_WIN) && (winPoints == 0)) {
+                break;
+            }
+            if ((map.length - j < POINTS_TO_WIN) && (winPoints == 0)) {
+                break;
+            }
+            if (map[i][j] == dot) {
+                winPoints++;
+            } else {
+                winPoints = 0;
+            }
+            if (winPoints == POINTS_TO_WIN) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private static boolean checkRightUp(int k, int j, char dot) {
+        for (int i = 0; i < POINTS_TO_WIN; i++) {
+            if ((k < 0) || (k >= map.length)) {
+                return false;
+            }
+            if ((j < 0) || (j >= map.length)) {
+                return false;
+            }
+            if (map[k][j] == dot) {
+                k--;
+                j++;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -91,6 +160,7 @@ public class HomeWorkApp {
     }
 
     private static void computerTurn() {
+        System.out.println("Ходит компьютер");
         int xCoordinate;
         int yCoordinate;
         Random random = new Random();
