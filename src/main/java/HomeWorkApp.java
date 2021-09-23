@@ -62,76 +62,56 @@ public class HomeWorkApp {
 
     }
 
-    private static boolean checkRight(int i, int k, char dot) {
-        int winPoints = 0;
-        for (int j = k; j < mapSize; j++) {
-            if ((map.length - j < POINTS_TO_WIN) && (winPoints == 0)) {
-                break;
-            }
-            if (map[i][j] == dot) {
-                winPoints++;
-            } else {
-                winPoints = 0;
-            }
-            if (winPoints == POINTS_TO_WIN) {
-                return true;
-            }
-
+    private static boolean checkRight(int i, int j, char dot) {
+        if (j > map.length - POINTS_TO_WIN) {
+            return false;
         }
-        return false;
-    }
-
-    private static boolean checkDown(int k, int j, char dot) {
-        int winPoints = 0;
-        for (int i = k; i < mapSize; i++) {
-            if ((map.length - i < POINTS_TO_WIN) && (winPoints == 0)) {
-                break;
-            }
+        for (int k = 0; k < POINTS_TO_WIN; k++) {
             if (map[i][j] == dot) {
-                winPoints++;
+                j++;
             } else {
-                winPoints = 0;
-            }
-            if (winPoints == POINTS_TO_WIN) {
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    private static boolean checkRightDown(int k, int j, char dot) {
-        int winPoints = 0;
-        for (int i = k; i < mapSize; i++, j++) {
-            if ((map.length - i < POINTS_TO_WIN) && (winPoints == 0)) {
-                break;
-            }
-            if ((map.length - j < POINTS_TO_WIN) && (winPoints == 0)) {
-                break;
-            }
-            if (map[i][j] == dot) {
-                winPoints++;
-            } else {
-                winPoints = 0;
-            }
-            if (winPoints == POINTS_TO_WIN) {
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    private static boolean checkRightUp(int k, int j, char dot) {
-        for (int i = 0; i < POINTS_TO_WIN; i++) {
-            if ((k < 0) || (k >= map.length)) {
                 return false;
             }
-            if ((j < 0) || (j >= map.length)) {
+        }
+        return true;
+    }
+
+    private static boolean checkDown(int i, int j, char dot) {
+        if (i > map.length - POINTS_TO_WIN) {
+            return false;
+        }
+        for (int k = 0; k < POINTS_TO_WIN; k++) {
+            if (map[i][j] == dot) {
+                i++;
+            } else {
                 return false;
             }
-            if (map[k][j] == dot) {
-                k--;
+        }
+        return true;
+    }
+
+    private static boolean checkRightDown(int i, int j, char dot) {
+        if ((i > map.length - POINTS_TO_WIN) || (j > map.length - POINTS_TO_WIN)) {
+            return false;
+        }
+        for (int k = 0; k < POINTS_TO_WIN; k++) {
+            if (map[i][j] == dot) {
+                i++;
+                j++;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean checkRightUp(int i, int j, char dot) {
+        if ((i < POINTS_TO_WIN - 1) || (j > map.length - POINTS_TO_WIN)) {
+            return false;
+        }
+        for (int k = 0; k < POINTS_TO_WIN; k++) {
+            if (map[i][j] == dot) {
+                i--;
                 j++;
             } else {
                 return false;
